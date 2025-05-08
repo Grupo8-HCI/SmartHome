@@ -5,18 +5,37 @@ Fan
 http://www.keyestudio.com
 */
 #include <Servo.h>
-int incomingByte = 0;
-Servo servoPuerta;
 
+int incomingByte = 0;
+int auto_leds = 0;
+
+int fan = 7;
+int fan_rotation = 6;
+int white_led = 13;
+int yellow_led = 5;
+int buzzer = 3;
+int button_1 = 4;
+int photo_sensor = A1;
+Servo servoDoor; // pin 9
+Servo servoWindow; // pin 10
+
+
+void turn_leds(int state) {
+  digitalWrite (5,  state);
+  digitalWrite (13,  state);
+}
 
 void setup () {
-   pinMode (7, OUTPUT); //define D7 pin as output
-   pinMode (6, OUTPUT); //define  D6 pin as output
-   pinMode (13, OUTPUT); //define  D6 pin as output
-   pinMode (5, OUTPUT); 
-   digitalWrite (7, LOW);
-   digitalWrite (6, LOW); // Reverse rotation of the motor
-   servoPuerta.attach(9);
+   pinMode (fan, OUTPUT); //define D7 pin as output
+   pinMode (fan_rotation, OUTPUT); //define  D6 pin as output
+   pinMode (white_led, OUTPUT); //define  D6 pin as output
+   pinMode (yellow_led, OUTPUT);
+   pinMode(buzzer, OUTPUT);
+   pinMode(button_1, INPUT);
+   pinMode(photo_sensor, INPUT);
+   servoDoor.attach(9);
+   servoWindow.attach(10);
+   servoWindow.write(0);
    Serial.begin(9600);
 }
 void loop () {
@@ -26,44 +45,84 @@ void loop () {
     incomingByte = Serial.read();
     
     if (incomingByte == (int)'a') {
-      digitalWrite (7, HIGH);
+      digitalWrite (fan, HIGH);
     } 
     
     if (incomingByte == (int)'b') {
-      digitalWrite (7, LOW);
+      digitalWrite (fan, LOW);
     }
 
     if (incomingByte == (int)'c') {
-      digitalWrite (13, HIGH);
+      digitalWrite (white_led, HIGH);
     }
 
     if (incomingByte == (int)'d') {
-      digitalWrite (13, LOW);
+      digitalWrite (white_led, LOW);
     }
 
     if (incomingByte == (int)'e') {
-      digitalWrite (5,  HIGH);
+      digitalWrite (yellow_led,  HIGH);
     }
 
     if (incomingByte == (int)'f') {
-      digitalWrite (5,  LOW);
+      digitalWrite (yellow_led,  LOW);
     }
 
     if (incomingByte == (int)'g') {
-      digitalWrite (5,  HIGH);
-      digitalWrite (13,  HIGH);
+      turn_leds(1);
     }
 
     if (incomingByte == (int)'h') {
-      digitalWrite (5,  LOW);
-      digitalWrite (13,  LOW);
+      turn_leds(0);
     }
 
     if (incomingByte == (int)'i') {
-      servoPuerta.write(180);
+      servoDoor.write(180);
     }
     if (incomingByte == (int)'j') {
-      servoPuerta.write(0);
+      servoDoor.write(0);
+    }
+
+    if (incomingByte == (int)'k') {
+      servoWindow.write(90);
+    }
+    
+    if (incomingByte == (int)'l') {
+      servoWindow.write(0);
+    }
+
+    if (incomingByte == (int)'m') {
+      auto_leds = 1;
+    }
+
+    if (incomingByte == (int)'n') {
+      auto_leds = 0;
+    }
+  }
+
+  if (digitalRead(button_1) == 0) {
+    unsigned char i, j;
+         for (i = 0; i <100; i ++) // output a frequency sound
+         {
+           digitalWrite (buzzer, HIGH); // Sound
+           delay (10); // Delay 1ms
+           digitalWrite (buzzer, LOW); // No sound
+           delay (10); // Delay 1ms
+         }
+         for (i = 0; i <100; i ++) // output sound of another frequency
+         {
+           digitalWrite (buzzer, HIGH); // Sound
+           delay (2); // delay 2ms
+           digitalWrite (buzzer, LOW); // No sound
+           delay (2); // delay 2ms
+         }
+  }
+
+  if (auto_leds) {
+    if (analogRead(photo_sensor) < 600) {
+     turn_leds(1);
+    } else {
+      turn_leds(0);
     }
   }
 }

@@ -85,7 +85,7 @@ class TurnOffFanIntentHandler(AbstractRequestHandler):
         )
     
 
-class TurnOnWhiteLedIntent(AbstractRequestHandler):
+class TurnOnWhiteLedIntentHandler(AbstractRequestHandler):
     """Handler for turning the white led on Intent."""
 
     def can_handle(self, handler_input):
@@ -105,7 +105,7 @@ class TurnOnWhiteLedIntent(AbstractRequestHandler):
         )
     
 
-class TurnOffWhiteLedIntent(AbstractRequestHandler):
+class TurnOffWhiteLedIntentHandler(AbstractRequestHandler):
     """Handler for turning the white led off Intent."""
 
     def can_handle(self, handler_input):
@@ -125,7 +125,7 @@ class TurnOffWhiteLedIntent(AbstractRequestHandler):
         )
 
 
-class TurnOnYellowLedIntent(AbstractRequestHandler):
+class TurnOnYellowLedIntentHandler(AbstractRequestHandler):
     """Handler for turning the white led on Intent."""
 
     def can_handle(self, handler_input):
@@ -144,7 +144,7 @@ class TurnOnYellowLedIntent(AbstractRequestHandler):
             .response
         )
 
-class TurnOffYellowLedIntent(AbstractRequestHandler):
+class TurnOffYellowLedIntentHandler(AbstractRequestHandler):
     """Handler for turning the white led off Intent."""
 
     def can_handle(self, handler_input):
@@ -163,7 +163,7 @@ class TurnOffYellowLedIntent(AbstractRequestHandler):
             .response
         )    
 
-class TurnOnLedsIntent(AbstractRequestHandler):
+class TurnOnLedsIntentHandler(AbstractRequestHandler):
     """Handler for turning the white led off Intent."""
 
     def can_handle(self, handler_input):
@@ -182,7 +182,7 @@ class TurnOnLedsIntent(AbstractRequestHandler):
             .response
         )  
     
-class TurnOffLedsIntent(AbstractRequestHandler):
+class TurnOffLedsIntentHandler(AbstractRequestHandler):
     """Handler for turning the white led off Intent."""
 
     def can_handle(self, handler_input):
@@ -201,7 +201,7 @@ class TurnOffLedsIntent(AbstractRequestHandler):
             .response
         ) 
 
-class OpenDoorIntent(AbstractRequestHandler):
+class OpenDoorIntentHandler(AbstractRequestHandler):
     """Handler for turning the white led off Intent."""
 
     def can_handle(self, handler_input):
@@ -220,7 +220,7 @@ class OpenDoorIntent(AbstractRequestHandler):
             .response
         )
 
-class CloseDoorIntent(AbstractRequestHandler):
+class CloseDoorIntentHandler(AbstractRequestHandler):
     """Handler for turning the white led off Intent."""
 
     def can_handle(self, handler_input):
@@ -232,6 +232,84 @@ class CloseDoorIntent(AbstractRequestHandler):
         _ = handler_input.attributes_manager.request_attributes["_"]
         speak_output = _("Puerta cerrada")
         send('j')
+
+        return (
+            handler_input.response_builder.speak(speak_output)
+            .ask(speak_output)
+            .response
+        )
+
+class OpenWindowIntentHandler(AbstractRequestHandler):
+    """Handler for turning the white led off Intent."""
+
+    def can_handle(self, handler_input):
+        # type: (HandlerInput) -> bool
+        return ask_utils.is_intent_name("OpenWindowIntent")(handler_input)
+
+    def handle(self, handler_input):
+        # type: (HandlerInput) -> Response
+        _ = handler_input.attributes_manager.request_attributes["_"]
+        speak_output = _("Ventana abierta")
+        send('k')
+
+        return (
+            handler_input.response_builder.speak(speak_output)
+            .ask(speak_output)
+            .response
+        )
+    
+class CloseWindowIntentHandler(AbstractRequestHandler):
+    """Handler for turning the white led off Intent."""
+
+    def can_handle(self, handler_input):
+        # type: (HandlerInput) -> bool
+        return ask_utils.is_intent_name("CloseWindowIntent")(handler_input)
+
+    def handle(self, handler_input):
+        # type: (HandlerInput) -> Response
+        _ = handler_input.attributes_manager.request_attributes["_"]
+        speak_output = _("Ventana cerrada")
+        send('l')
+
+        return (
+            handler_input.response_builder.speak(speak_output)
+            .ask(speak_output)
+            .response
+        )
+    
+
+class EnableAutoLedsIntentHandler(AbstractRequestHandler):
+    """Handler for enabling the auto leds Intent."""
+
+    def can_handle(self, handler_input):
+        # type: (HandlerInput) -> bool
+        return ask_utils.is_intent_name("EnableAutoLedsIntent")(handler_input)
+
+    def handle(self, handler_input):
+        # type: (HandlerInput) -> Response
+        _ = handler_input.attributes_manager.request_attributes["_"]
+        speak_output = _("Luces automáticas activadas")
+        send('m')
+
+        return (
+            handler_input.response_builder.speak(speak_output)
+            .ask(speak_output)
+            .response
+        )
+    
+
+class DisableAutoLedsIntentHandler(AbstractRequestHandler):
+    """Handler for disabling the auto leds Intent."""
+
+    def can_handle(self, handler_input):
+        # type: (HandlerInput) -> bool
+        return ask_utils.is_intent_name("DisableAutoLedsIntent")(handler_input)
+
+    def handle(self, handler_input):
+        # type: (HandlerInput) -> Response
+        _ = handler_input.attributes_manager.request_attributes["_"]
+        speak_output = _("Luces automáticas desactivadas")
+        send('n')
 
         return (
             handler_input.response_builder.speak(speak_output)
@@ -271,7 +349,6 @@ class CancelOrStopIntentHandler(AbstractRequestHandler):
         # type: (HandlerInput) -> Response
         _ = handler_input.attributes_manager.request_attributes["_"]
         speak_output = _("Adios")
-        arduino.close()
 
         return handler_input.response_builder.speak(speak_output).response
 
@@ -286,11 +363,11 @@ class FallbackIntentHandler(AbstractRequestHandler):
     def handle(self, handler_input):
         # type: (HandlerInput) -> Response
         speech = (
-            "Hmm, I'm not sure. You can say Hello or Help. What would you like to do?"
+            "No estoy segura de poder ayudarte con eso."
         )
-        reprompt = "I didn't catch that. What can I help you with?"
+        # reprompt = "I didn't catch that. What can I help you with?"
 
-        return handler_input.response_builder.speak(speech).ask(reprompt).response
+        return handler_input.response_builder.speak(speech).ask(speech).response
 
 
 class SessionEndedRequestHandler(AbstractRequestHandler):
@@ -304,6 +381,7 @@ class SessionEndedRequestHandler(AbstractRequestHandler):
         # type: (HandlerInput) -> Response
 
         # Any cleanup logic goes here.
+        arduino.close()
 
         return handler_input.response_builder.response
 
@@ -345,7 +423,7 @@ class CatchAllExceptionHandler(AbstractExceptionHandler):
     def handle(self, handler_input, exception):
         # type: (HandlerInput, Exception) -> Response
         _ = handler_input.attributes_manager.request_attributes["_"]
-        speak_output = _("")
+        speak_output = _("error")
 
         return (
             handler_input.response_builder.speak(speak_output)
