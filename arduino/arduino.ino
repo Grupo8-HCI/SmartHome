@@ -54,26 +54,32 @@ void loop () {
 
     if (incomingByte == (int)'c') {
       digitalWrite (white_led, HIGH);
+      auto_leds = 0;
     }
 
     if (incomingByte == (int)'d') {
       digitalWrite (white_led, LOW);
+      auto_leds = 0;
     }
 
     if (incomingByte == (int)'e') {
       digitalWrite (yellow_led,  HIGH);
+      auto_leds = 0;
     }
 
     if (incomingByte == (int)'f') {
       digitalWrite (yellow_led,  LOW);
+      auto_leds = 0;
     }
 
     if (incomingByte == (int)'g') {
       turn_leds(1);
+      auto_leds = 0;
     }
 
     if (incomingByte == (int)'h') {
       turn_leds(0);
+      auto_leds = 0;
     }
 
     if (incomingByte == (int)'i') {
