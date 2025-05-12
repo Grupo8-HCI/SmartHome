@@ -19,7 +19,7 @@ from ask_sdk_model import Response
 
 import serial
 
-arduino = serial.Serial(port='/dev/tty.SLAB_USBtoUART', baudrate=9600, timeout=.1)
+arduino = None
 
 def send(text):
     arduino.write(bytes(text, 'utf-8'))
@@ -35,6 +35,8 @@ class LaunchRequestHandler(AbstractRequestHandler):
 
     def handle(self, handler_input):
         # type: (HandlerInput) -> Response
+        global arduino
+        arduino = serial.Serial(port='/dev/tty.SLAB_USBtoUART', baudrate=9600, timeout=.1)
         _ = handler_input.attributes_manager.request_attributes["_"]
         speak_output = _("¡Bienvenido!")
 
