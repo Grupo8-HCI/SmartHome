@@ -5,6 +5,7 @@ Fan
 http://www.keyestudio.com
 */
 #include <Servo.h>
+#include <LiquidCrystal_I2C.h>
 
 int incomingByte = 0;
 int auto_leds = 0;
@@ -16,13 +17,54 @@ int yellow_led = 5;
 int buzzer = 3;
 int button_1 = 4;
 int photo_sensor = A1;
+int motion_sensor = 2;
 Servo servoDoor; // pin 9
 Servo servoWindow; // pin 10
+LiquidCrystal_I2C lcd (0x27,16,2);
 
 
 void turn_leds(int state) {
   digitalWrite (5,  state);
   digitalWrite (13,  state);
+}
+
+void check_button() {
+  if (digitalRead(button_1) == 0) {
+    unsigned char i, j;
+         for (i = 0; i <100; i ++) // output a frequency sound
+         {
+           digitalWrite (buzzer, HIGH); // Sound
+           delay(1); // Delay 1ms
+           digitalWrite (buzzer, LOW); // No sound
+           delay(1); // Delay 1ms
+         }
+         for (i = 0; i <100; i ++) // output sound of another frequency
+         {
+           digitalWrite (buzzer, HIGH); // Sound
+           delay(2); // delay 2ms
+           digitalWrite (buzzer, LOW); // No sound
+           delay(2); // delay 2ms
+         }
+  }
+}
+
+void check_photo_sensor() {
+  if (auto_leds) {
+    if (analogRead(photo_sensor) < 600) {
+     turn_leds(1);
+    } else {
+      turn_leds(0);
+    }
+  }
+}
+
+void check_motion_sensor() {
+  if (digitalRead(motion_sensor)) {
+    lcd.setCursor(0, 0);
+    lcd.print("Bienvenido!");
+  } else {
+    lcd.clear();
+  }
 }
 
 void setup () {
@@ -33,14 +75,15 @@ void setup () {
    pinMode(buzzer, OUTPUT);
    pinMode(button_1, INPUT);
    pinMode(photo_sensor, INPUT);
-   servoDoor.attach(9);
+   pinMode(motion_sensor, INPUT);
    servoWindow.attach(10);
    servoWindow.write(0);
+   lcd.init ();
+   lcd.backlight();
    Serial.begin(9600);
 }
-void loop () {
-  char c;
 
+void loop () {
   if (Serial.available() > 0) {
     incomingByte = Serial.read();
     
@@ -106,30 +149,10 @@ void loop () {
     }
   }
 
-  if (digitalRead(button_1) == 0) {
-    unsigned char i, j;
-         for (i = 0; i <100; i ++) // output a frequency sound
-         {
-           digitalWrite (buzzer, HIGH); // Sound
-           delay (10); // Delay 1ms
-           digitalWrite (buzzer, LOW); // No sound
-           delay (10); // Delay 1ms
-         }
-         for (i = 0; i <100; i ++) // output sound of another frequency
-         {
-           digitalWrite (buzzer, HIGH); // Sound
-           delay (2); // delay 2ms
-           digitalWrite (buzzer, LOW); // No sound
-           delay (2); // delay 2ms
-         }
-  }
+  check_button();
 
-  if (auto_leds) {
-    if (analogRead(photo_sensor) < 600) {
-     turn_leds(1);
-    } else {
-      turn_leds(0);
-    }
-  }
+  check_photo_sensor();
+
+  check_motion_sensor();
 }
 //
