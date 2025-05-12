@@ -4,7 +4,6 @@ from ask_sdk_core.skill_builder import SkillBuilder
 from intents import *
 
 
-
 # The SkillBuilder object acts as the entry point for your skill, routing all request and response
 # payloads to the handlers above. Make sure any new handlers or interceptors you've
 # defined are included below. The order matters - they're processed top to bottom.
@@ -18,7 +17,7 @@ skill_adapter = None
 
 @app.route("/alexa", methods=["POST"])
 def invoke_skill():
-    
+
     return skill_adapter.dispatch_request()
 
 
@@ -58,4 +57,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-

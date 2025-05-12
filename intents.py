@@ -21,8 +21,9 @@ import serial
 
 arduino = None
 
+
 def send(text):
-    arduino.write(bytes(text, 'utf-8'))
+    arduino.write(bytes(text, "utf-8"))
 
 
 class LaunchRequestHandler(AbstractRequestHandler):
@@ -36,7 +37,9 @@ class LaunchRequestHandler(AbstractRequestHandler):
     def handle(self, handler_input):
         # type: (HandlerInput) -> Response
         global arduino
-        arduino = serial.Serial(port='/dev/tty.SLAB_USBtoUART', baudrate=9600, timeout=.1)
+        arduino = serial.Serial(
+            port="/dev/tty.SLAB_USBtoUART", baudrate=9600, timeout=0.1
+        )
         _ = handler_input.attributes_manager.request_attributes["_"]
         speak_output = _("¡Bienvenido!")
 
@@ -58,14 +61,14 @@ class TurnOnFanIntentHandler(AbstractRequestHandler):
         # type: (HandlerInput) -> Response
         _ = handler_input.attributes_manager.request_attributes["_"]
         speak_output = _("Ventilador encendido")
-        send('a')
+        send("a")
 
         return (
             handler_input.response_builder.speak(speak_output)
             .ask(speak_output)
             .response
         )
-    
+
 
 class TurnOffFanIntentHandler(AbstractRequestHandler):
     """Handler for turning the fan off Intent."""
@@ -78,14 +81,14 @@ class TurnOffFanIntentHandler(AbstractRequestHandler):
         # type: (HandlerInput) -> Response
         _ = handler_input.attributes_manager.request_attributes["_"]
         speak_output = _("Ventilador apagado")
-        send('b')
+        send("b")
 
         return (
             handler_input.response_builder.speak(speak_output)
             .ask(speak_output)
             .response
         )
-    
+
 
 class TurnOnWhiteLedIntentHandler(AbstractRequestHandler):
     """Handler for turning the white led on Intent."""
@@ -98,14 +101,14 @@ class TurnOnWhiteLedIntentHandler(AbstractRequestHandler):
         # type: (HandlerInput) -> Response
         _ = handler_input.attributes_manager.request_attributes["_"]
         speak_output = _("Luz blanca encendida")
-        send('c') 
+        send("c")
 
         return (
             handler_input.response_builder.speak(speak_output)
             .ask(speak_output)
             .response
         )
-    
+
 
 class TurnOffWhiteLedIntentHandler(AbstractRequestHandler):
     """Handler for turning the white led off Intent."""
@@ -118,7 +121,7 @@ class TurnOffWhiteLedIntentHandler(AbstractRequestHandler):
         # type: (HandlerInput) -> Response
         _ = handler_input.attributes_manager.request_attributes["_"]
         speak_output = _("Luz blanca apagada")
-        send('d')
+        send("d")
 
         return (
             handler_input.response_builder.speak(speak_output)
@@ -138,13 +141,14 @@ class TurnOnYellowLedIntentHandler(AbstractRequestHandler):
         # type: (HandlerInput) -> Response
         _ = handler_input.attributes_manager.request_attributes["_"]
         speak_output = _("Luz amarilla encendida")
-        send('e')
+        send("e")
 
         return (
             handler_input.response_builder.speak(speak_output)
             .ask(speak_output)
             .response
         )
+
 
 class TurnOffYellowLedIntentHandler(AbstractRequestHandler):
     """Handler for turning the white led off Intent."""
@@ -157,13 +161,14 @@ class TurnOffYellowLedIntentHandler(AbstractRequestHandler):
         # type: (HandlerInput) -> Response
         _ = handler_input.attributes_manager.request_attributes["_"]
         speak_output = _("Luz amarilla apagada")
-        send('f') 
+        send("f")
 
         return (
             handler_input.response_builder.speak(speak_output)
             .ask(speak_output)
             .response
-        )    
+        )
+
 
 class TurnOnLedsIntentHandler(AbstractRequestHandler):
     """Handler for turning the white led off Intent."""
@@ -176,14 +181,15 @@ class TurnOnLedsIntentHandler(AbstractRequestHandler):
         # type: (HandlerInput) -> Response
         _ = handler_input.attributes_manager.request_attributes["_"]
         speak_output = _("Luces encendidas")
-        send('g')
+        send("g")
 
         return (
             handler_input.response_builder.speak(speak_output)
             .ask(speak_output)
             .response
-        )  
-    
+        )
+
+
 class TurnOffLedsIntentHandler(AbstractRequestHandler):
     """Handler for turning the white led off Intent."""
 
@@ -195,13 +201,14 @@ class TurnOffLedsIntentHandler(AbstractRequestHandler):
         # type: (HandlerInput) -> Response
         _ = handler_input.attributes_manager.request_attributes["_"]
         speak_output = _("Luces apagadas")
-        send('h')
+        send("h")
 
         return (
             handler_input.response_builder.speak(speak_output)
             .ask(speak_output)
             .response
-        ) 
+        )
+
 
 class OpenDoorIntentHandler(AbstractRequestHandler):
     """Handler for turning the white led off Intent."""
@@ -214,13 +221,14 @@ class OpenDoorIntentHandler(AbstractRequestHandler):
         # type: (HandlerInput) -> Response
         _ = handler_input.attributes_manager.request_attributes["_"]
         speak_output = _("Puerta abierta")
-        send('i')
+        send("i")
 
         return (
             handler_input.response_builder.speak(speak_output)
             .ask(speak_output)
             .response
         )
+
 
 class CloseDoorIntentHandler(AbstractRequestHandler):
     """Handler for turning the white led off Intent."""
@@ -233,13 +241,14 @@ class CloseDoorIntentHandler(AbstractRequestHandler):
         # type: (HandlerInput) -> Response
         _ = handler_input.attributes_manager.request_attributes["_"]
         speak_output = _("Puerta cerrada")
-        send('j')
+        send("j")
 
         return (
             handler_input.response_builder.speak(speak_output)
             .ask(speak_output)
             .response
         )
+
 
 class OpenWindowIntentHandler(AbstractRequestHandler):
     """Handler for turning the white led off Intent."""
@@ -252,14 +261,15 @@ class OpenWindowIntentHandler(AbstractRequestHandler):
         # type: (HandlerInput) -> Response
         _ = handler_input.attributes_manager.request_attributes["_"]
         speak_output = _("Ventana abierta")
-        send('k')
+        send("k")
 
         return (
             handler_input.response_builder.speak(speak_output)
             .ask(speak_output)
             .response
         )
-    
+
+
 class CloseWindowIntentHandler(AbstractRequestHandler):
     """Handler for turning the white led off Intent."""
 
@@ -271,14 +281,14 @@ class CloseWindowIntentHandler(AbstractRequestHandler):
         # type: (HandlerInput) -> Response
         _ = handler_input.attributes_manager.request_attributes["_"]
         speak_output = _("Ventana cerrada")
-        send('l')
+        send("l")
 
         return (
             handler_input.response_builder.speak(speak_output)
             .ask(speak_output)
             .response
         )
-    
+
 
 class EnableAutoLedsIntentHandler(AbstractRequestHandler):
     """Handler for enabling the auto leds Intent."""
@@ -291,14 +301,14 @@ class EnableAutoLedsIntentHandler(AbstractRequestHandler):
         # type: (HandlerInput) -> Response
         _ = handler_input.attributes_manager.request_attributes["_"]
         speak_output = _("Luces automáticas activadas")
-        send('m')
+        send("m")
 
         return (
             handler_input.response_builder.speak(speak_output)
             .ask(speak_output)
             .response
         )
-    
+
 
 class DisableAutoLedsIntentHandler(AbstractRequestHandler):
     """Handler for disabling the auto leds Intent."""
@@ -311,13 +321,14 @@ class DisableAutoLedsIntentHandler(AbstractRequestHandler):
         # type: (HandlerInput) -> Response
         _ = handler_input.attributes_manager.request_attributes["_"]
         speak_output = _("Luces automáticas desactivadas")
-        send('n')
+        send("n")
 
         return (
             handler_input.response_builder.speak(speak_output)
             .ask(speak_output)
             .response
         )
+
 
 class HelpIntentHandler(AbstractRequestHandler):
     """Handler for Help Intent."""
@@ -364,9 +375,7 @@ class FallbackIntentHandler(AbstractRequestHandler):
 
     def handle(self, handler_input):
         # type: (HandlerInput) -> Response
-        speech = (
-            "No estoy segura de poder ayudarte con eso."
-        )
+        speech = "No estoy segura de poder ayudarte con eso."
         # reprompt = "I didn't catch that. What can I help you with?"
 
         return handler_input.response_builder.speak(speech).ask(speech).response
