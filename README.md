@@ -4,6 +4,9 @@
 ucuencagrupo@gmail.com
 grupo8_2025
 
+## Información para armar la casa
+https://wiki.keyestudio.com/KS0085_Keyestudio_Smart_Home_Kit_for_Arduino
+
 ### Developer Console de Alexa 
 (https://developer.amazon.com/alexa/console/ask)
 
@@ -86,3 +89,7 @@ Es necesario cambiar el endpoint cada vez se expone el servidor local usando her
 5. En default region” necesitamos colocar la URL generada por cloudflared seguida por la ruta “/alexa”. En este ejemplo, deberíamos colocar *https://employment-fetish-strengths-improvements.trycloudflare.com/alexa*
 6. Guardamos los cambios y construimosBuild Skill. Este botón está en la sección “Intents”).
 7. Para más información sobre cómo se hicieron las rutas, se puede consultar la documentación oficial: *https://developer.amazon.com/en-US/docs/alexa/alexa-skills-kit-sdk-for-python/overview.html*
+
+### Cargar código en el arduino
+Abrimos el archivo “arduino.ino” que se encuentra en la carpeta “Arduino”. Es necesario tener Arduino instalado: *http://arduino.cc/en/software/*, selecionamos el modelo Arduino Uno y el puerto por el cual está conectado. 
+***Nota:** es necesario quitar la placa de bluetooth al momento de subir el código en el microcontrolador.*
