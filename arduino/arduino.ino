@@ -76,6 +76,8 @@ void setup () {
    pinMode(button_1, INPUT);
    pinMode(photo_sensor, INPUT);
    pinMode(motion_sensor, INPUT);
+   servoDoor.attach(9);
+   servoDoor.write(0);
    servoWindow.attach(10);
    servoWindow.write(0);
    lcd.init ();
@@ -128,6 +130,7 @@ void loop () {
     if (incomingByte == (int)'i') {
       servoDoor.write(180);
     }
+    
     if (incomingByte == (int)'j') {
       servoDoor.write(0);
     }
