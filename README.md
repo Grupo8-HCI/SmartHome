@@ -19,14 +19,14 @@ https://github.com/Grupo8-HCI/SmartHome
 
 En la raíz del proyecto desarrollado, abrir una terminal y ejecutar los siguientes comandos: 
 #### En Linux y macOS
-```
+```bash
 python3 -m venv .env
 source ./.env/bin/activate
 pip install -r requirements.txt
 ```
 #### En windows
 
-```
+```bash
 python -m venv .env
 ./.env/Scripts/activate
 pip install -r requirements.txt
@@ -38,11 +38,11 @@ Después de instalar las dependencias, el siguiente paso es inicializar el servi
 
 #### En Linux y macOS
 
-```
+```bash
 python3 ./main.py
 ```
 ### En Windows
-```
+```bash
 python ./main.py
 ```
 
@@ -51,25 +51,25 @@ El proceso de instalación de cloudflared dependerá del sistema operativo. En a
 
 #### En macOS (asumiendo que el usuario tiene homebrew instalado):
 
-```
+```bash
 brew install cloudflared
 ```
 
 #### En Windows (asumiendo que el usuario tiene chocolatey):
 
-```
+```bash
 choco install cloudflared
 ```
 
 ### Exponer servidor local
 En una terminal, ejecutar el siguiente comando:
-```
+```bash
 cloudflared tunnel --url http://localhost:5000
 ```
 
 Luego, hay que buscar lo siguiente (en la salida del comando):
 
-```
+```bash
 +--------------------------------------------------------------------------------------------+
 |  Your quick Tunnel has been created! Visit it at (it may take                              |
 |  https://employment-fetish-strengths-improvements.trycloudflare.com                        |
