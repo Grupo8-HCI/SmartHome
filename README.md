@@ -74,4 +74,14 @@ Luego, hay que buscar lo siguiente (en la salida del comando):
 ```
 Este es el túnel a nuestro servidor local.
 
-#### NOTA: esta URL cambia cada vez que se ejecuta el comando.
+***NOTA**: esta URL cambia cada vez que se ejecuta el comando.*
+
+### Cambiar endpoint
+Es necesario cambiar el endpoint cada vez se expone el servidor local usando herramientas como cloudflared (la que se usó en este proyecto) o ngrok.
+
+- Dirigirse a https://developer.amazon.com/alexa/console/ask
+- En la tabla de las Alexa Skills, seleccionar la skill “SmartHome”.- 
+- Luego, en el menú de la izquierda, seleccionar “Endpoint”.
+- Seleccionar HTTPS (en caso de que no esté seleccionado).
+- En “default region” necesitamos colocar la URL generada por cloudflared seguida por la ruta “/alexa”. En este ejemplo, deberíamos colocar “
+
