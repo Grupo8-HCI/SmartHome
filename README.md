@@ -54,12 +54,14 @@ El proceso de instalación de cloudflared dependerá del sistema operativo. En a
 ```bash
 brew install cloudflared
 ```
+Link homebrew: *https://brew.sh/*
 
 #### En Windows (asumiendo que el usuario tiene chocolatey):
 
 ```bash
 choco install cloudflared
 ```
+Link chocolatey: *https://chocolatey.org/install*
 
 ### Exponer servidor local
 En una terminal, ejecutar el siguiente comando:
