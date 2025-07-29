@@ -29,5 +29,17 @@ python -m venv .env
 pip install -r requirements.txt
 ```
 
+
 ### Inicializar servidor
-En la raíz del proyecto desarrollado, abrir una terminal y ejecutar los siguientes comandos
+Después de instalar las dependencias, el siguiente paso es inicializar el servidor. Para esto, es necesario estar dentro del entorno virtual que creamos previamente y ejecutar los siguientes comandos:
+
+#### En Linux y macOS
+
+```
+python3 ./main.py
+```
+### En Windows
+```{python}
+python ./main.py
+```
+
