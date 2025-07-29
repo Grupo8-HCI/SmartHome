@@ -1,8 +1,8 @@
 # SmartHome
 ## Credenciales
-### Google (gmail)
-ucuencagrupo@gmail.com
-grupo8_2025
+### Google (gmail) y Github
+Correo: ucuencagrupo@gmail.com
+Contraseña: grupo8_2025
 
 ## Información para armar la casa
 https://wiki.keyestudio.com/KS0085_Keyestudio_Smart_Home_Kit_for_Arduino
@@ -10,7 +10,7 @@ https://wiki.keyestudio.com/KS0085_Keyestudio_Smart_Home_Kit_for_Arduino
 ### Developer Console de Alexa 
 (https://developer.amazon.com/alexa/console/ask)
 
-### Github
+### Github Repositorio
 https://github.com/Grupo8-HCI/SmartHome
 
 ## Ejecución del proyecto
