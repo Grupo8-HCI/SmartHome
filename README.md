@@ -39,7 +39,39 @@ Después de instalar las dependencias, el siguiente paso es inicializar el servi
 python3 ./main.py
 ```
 ### En Windows
-```{python}
+```
 python ./main.py
 ```
 
+### Instalar cloudflared
+El proceso de instalación de cloudflared dependerá del sistema operativo. En ambos casos se requiere privilegios de administrador/superusuario
+
+#### En macOS (asumiendo que el usuario tiene homebrew instalado):
+
+```
+brew install cloudflared
+```
+
+#### En Windows (asumiendo que el usuario tiene chocolatey):
+
+```
+choco install cloudflared
+```
+
+### Exponer servidor local
+En una terminal, ejecutar el siguiente comando:
+```
+cloudflared tunnel --url http://localhost:5000
+```
+
+Luego, hay que buscar lo siguiente (en la salida del comando):
+
+```
++--------------------------------------------------------------------------------------------+
+|  Your quick Tunnel has been created! Visit it at (it may take                              |
+|  https://employment-fetish-strengths-improvements.trycloudflare.com                        |
++--------------------------------------------------------------------------------------------+
+```
+Este es el túnel a nuestro servidor local.
+
+#### NOTA: esta URL cambia cada vez que se ejecuta el comando.
