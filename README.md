@@ -92,4 +92,5 @@ Es necesario cambiar el endpoint cada vez se expone el servidor local usando her
 
 ### Cargar código en el arduino
 Abrimos el archivo “arduino.ino” que se encuentra en la carpeta “Arduino”. Es necesario tener Arduino instalado: *http://arduino.cc/en/software/*, selecionamos el modelo Arduino Uno y el puerto por el cual está conectado. 
+
 ***Nota:** es necesario quitar la placa de bluetooth al momento de subir el código en el microcontrolador.*
